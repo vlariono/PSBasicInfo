@@ -1,3 +1,3 @@
 # Get-ItemBasicInfo
 
-This function retrieves FILE_BASIC_INFO structure from file system item. This structure contains ChangeTime property. The diffrerence between LastwWriteTime and Change­Time is that Change­Time also includes changes to the file metadata, such as changing ACL or attributes. Change­Time will be updated any time metadata or data is changed. LastwWriteTime will be updated only if data is changed. 
+This function retrieves FILE_BASIC_INFO structure from file system item. This structure contains ChangeTime property. The diffrerence between LastWriteTime and Change­Time is that Change­Time also includes changes to the file metadata, such as changing ACL or attributes. Change­Time will be updated any time metadata or data is changed. LastWriteTime will be updated only if data is changed. 
