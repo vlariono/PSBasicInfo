@@ -38,6 +38,22 @@ $script:memberDefinition =  @'
 
 function Get-ItemBasicInfo 
 {
+    <#
+    .SYNOPSIS
+        This function retrieves FILE_BASIC_INFO structure from file system item.
+    .DESCRIPTION
+        This structure contains ChangeTime property. The property will be updated any time metadata or data is changed. LastWriteTime will be updated only if data is changed.
+    .EXAMPLE
+        PS C:\> Get-Item D:\Test|Get-ItemBasicInfo 
+        Pipe result of Get-item to Get-ItemBasicInfo
+    .EXAMPLE
+        PS C:\> Get-ChildItem -Recurse D:\Test|Get-ItemBasicInfo
+        Pipe result of Get-ChildItem to Get-ItemBasicInfo
+    .INPUTS
+        System.IO.FileSystemInfo
+    .OUTPUTS
+        PSCustomObject
+    #>
     [CmdletBinding()]
     param(
         # Path to file or directory
@@ -64,7 +80,7 @@ function Get-ItemBasicInfo
             Write-Verbose "CreateFile: Open file $currentPath"
             $fileHandle = [Kernel32.File]::CreateFile($currentPath,
                 [System.IO.FileAccess]::Read,
-                [System.IO.FileShare]::Read,
+                [System.IO.FileShare]::ReadWrite,
                 [System.IntPtr]::Zero,
                 [System.IO.FileMode]::Open,
                 [System.UInt32]0x02000000,
