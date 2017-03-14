@@ -109,7 +109,7 @@ function Get-ItemBasicInfo
             
             if(!$bClosed)
             {
-                throw "CloseHandle: Error closing handle $fileHandle of $Path"
+                Write-Warning "CloseHandle: Error closing handle $fileHandle of $Path"
             }
         }
     }
