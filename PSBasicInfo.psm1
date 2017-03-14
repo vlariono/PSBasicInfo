@@ -90,7 +90,7 @@ function Get-ItemBasicInfo
             
             # Return result
             [PSCustomObject]@{
-                File = $Path
+                Item = $Path
                 CreationTime = [System.DateTime]::FromFileTime($fileBasicInfo.CreationTime)
                 LastAccessTime = [System.DateTime]::FromFileTime($fileBasicInfo.LastAccessTime)
                 LastWriteTime  = [System.DateTime]::FromFileTime($fileBasicInfo.LastWriteTime)
