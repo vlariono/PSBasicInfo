@@ -1,4 +1,4 @@
-$script:memberDefinition =  @'
+$script:memberDefinition = @'
 
     public struct FILE_BASIC_INFO
     {
@@ -36,6 +36,8 @@ $script:memberDefinition =  @'
 
 '@ 
 
+Add-Type -MemberDefinition $script:memberDefinition -Name File -Namespace Kernel32
+
 function Get-ItemBasicInfo 
 {
     <#
@@ -68,7 +70,7 @@ function Get-ItemBasicInfo
     
     begin 
     {
-        Add-Type -MemberDefinition $script:memberDefinition -Name File -Namespace Kernel32
+        
     }
     
     process
