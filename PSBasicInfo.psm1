@@ -36,7 +36,7 @@ $script:memberDefinition = @'
 
 '@ 
 
-Add-Type -MemberDefinition $script:memberDefinition -Name File -Namespace Kernel32
+Add-Type -MemberDefinition $script:memberDefinition -Name 'FileBasicInfo' -Namespace 'PSBasicInfo'
 
 function Get-ItemBasicInfo 
 {
@@ -80,7 +80,7 @@ function Get-ItemBasicInfo
         try
         {
             Write-Verbose "CreateFile: Open file $currentPath"
-            $fileHandle = [Kernel32.File]::CreateFile($currentPath,
+            $fileHandle = [PSBasicInfo.FileBasicInfo]::CreateFile($currentPath,
                 [System.IO.FileAccess]::Read,
                 [System.IO.FileShare]::ReadWrite,
                 [System.IntPtr]::Zero,
@@ -94,10 +94,10 @@ function Get-ItemBasicInfo
             }
             
             # Output object
-            $fileBasicInfo = New-Object -TypeName Kernel32.File+FILE_BASIC_INFO
+            $fileBasicInfo = New-Object -TypeName PSBasicInfo.FileBasicInfo+FILE_BASIC_INFO
             
             Write-Verbose "GetFileInformationByHandleEx: Get basic info"
-            $bRetrieved = [Kernel32.File]::GetFileInformationByHandleEx($fileHandle,0,
+            $bRetrieved = [PSBasicInfo.FileBasicInfo]::GetFileInformationByHandleEx($fileHandle,0,
                 [ref]$fileBasicInfo,
                 [System.Runtime.InteropServices.Marshal]::SizeOf($fileBasicInfo))
             
@@ -123,7 +123,7 @@ function Get-ItemBasicInfo
         finally
         {
             Write-Verbose "CloseHandle: Close file $currentPath"
-            $bClosed = [Kernel32.File]::CloseHandle($fileHandle)
+            $bClosed = [PSBasicInfo.FileBasicInfo]::CloseHandle($fileHandle)
             
             if(!$bClosed)
             {
